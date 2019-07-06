@@ -1,0 +1,38 @@
+
+type Task {
+  _id: ID!
+  name: String
+  done: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+input TaskInput {
+  name: String!
+  done: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+input TaskEditInput {
+  name: String!
+  done: Boolean
+}
+
+type Query {
+
+  "Return all the tasks"
+  getTasks: [Task]
+}
+
+type Mutation {
+  "Create a task"
+  createTask(input: TaskInput!): Task
+
+  "Update a task"
+  editTask(_id: ID!, input: TaskEditInput): Task
+
+  "Delete a task"
+  deleteTask(_id: ID!): Boolean
+}
+

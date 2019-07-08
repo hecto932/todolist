@@ -1,5 +1,6 @@
 'use strict'
 
+const { ObjectId } = require('mongodb')
 const MongoLib = require('./mongo')
 
 class TaskService {
@@ -19,6 +20,10 @@ class TaskService {
 
   async getAll (queryParams) {
     const query = queryParams || {}
+    if (query && query.userId) {
+      query.userId = ObjectId(query.userId)
+    }
+
     const tasks = await this.mongoDB.getAll(this.collection, query)
 
     return tasks || []

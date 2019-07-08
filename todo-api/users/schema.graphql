@@ -1,0 +1,17 @@
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+  tasks: [Task!]
+  createdAt: Date
+  updatedAt: Date
+}
+
+type Query {
+
+  "Request token"
+  userAuthenticate(email: String, password: String): JSON
+
+  "Return all the users"
+  getUsers: [User!]
+}

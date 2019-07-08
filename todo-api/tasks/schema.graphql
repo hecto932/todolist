@@ -1,17 +1,18 @@
 
 type Task {
   _id: ID!
+  userId: ID!
   name: String
   done: Boolean
-  createdAt: String
-  updatedAt: String
+  createdAt: Date
+  updatedAt: Date
 }
 
 input TaskInput {
   name: String!
   done: Boolean
-  createdAt: String
-  updatedAt: String
+  createdAt: Date
+  updatedAt: Date
 }
 
 input TaskEditInput {

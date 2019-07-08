@@ -46,6 +46,13 @@ class MongoLib {
     });
   }
 
+  find(collection, query) {
+    debug(`${this.dbName} -> ${collection} -> find`);
+    return this.connection().then(db => {
+      return db.collection(collection).findOne(query);
+    });
+  }
+
   create(collection, data) {
     debug(`${this.dbName} -> ${collection} -> create`);
     return this.connection()

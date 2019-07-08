@@ -13,9 +13,11 @@ const Mongo = new MongoLib(config)
 
 // Documentos
 const TaskService = require('./lib/tasks')
+const UserService = require('./lib/users')
 
 // Mocks
 const tasks = require('./utils/mocks/tasks')
+const users = require('./utils/mocks/users')
 
 async function setup () {
   try {
@@ -35,10 +37,14 @@ async function setup () {
     const dropDatabaseResult = await Mongo.dropDatabase();
     console.log(chalk.green(`DropDatabaseResult ${dropDatabaseResult}`))
 
-    // CREATING TASKS
+    // CREATING USERS
+    const userService = new UserService(config)
+    const userInsertManyResult = await userService.insertMany(users)
+
     const taskService = new TaskService(config)
-    const taskInsertManyResult = await taskService.insertMany(tasks)
+    const taskInsertManyResult = await taskService.insertMany(tasks.map(t => ({ ...t, userId: userInsertManyResult[0] })))
     console.log(chalk.green(`Created ${Object.keys(taskInsertManyResult).length} tasks`))
+    console.log(chalk.green(`Created ${Object.keys(userInsertManyResult).length} users`))
     process.exit(0)
   } catch (err) {
     console.log(chalk.red(`Error: ${err.message}`))

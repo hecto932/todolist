@@ -2,7 +2,25 @@
 
 require('dotenv').config()
 
+const production = process.env.NODE_ENV === 'production'
+const development = process.env.NODE_ENV === 'development'
+
 module.exports = {
+  production,
+  development,
+  server: {
+    auth: true,
+  },
+  graphql: {
+    playground: true,
+    tracing: true,
+    introspection: false,
+    depth: 2,
+    complexity: 1000,
+  },
+  auth: {
+    secret: process.env.AUTH_JWT_SECRET || 'todo-secret' // HERE AUTHENTICATION SECRET
+  },
   db: {
     dbUser: process.env.DB_USER,
     dbPass: process.env.DB_PASS,

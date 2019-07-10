@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react'
 
-const Layout = props => (
-  <Fragment>
-    {props.children}
-  </Fragment>
-)
+import Navbar from '../General/Navbar'
 
-export default Layout
+export default function Layout (props) {
+  return (
+    <Fragment>
+      <Navbar />
+      {props.children}
+    </Fragment>
+  )
+}

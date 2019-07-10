@@ -4,10 +4,10 @@ import Layout from './Layout'
 
 import Home from '../pages/Home'
 
-const App = () => (
-  <Layout>
-    <Home />
-  </Layout>
-)
-
-export default App
+export default function App () {
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  )
+}

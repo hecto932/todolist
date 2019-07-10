@@ -9,7 +9,7 @@ module.exports = {
   production,
   development,
   server: {
-    auth: true,
+    auth: false,
   },
   graphql: {
     playground: true,

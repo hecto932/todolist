@@ -3,11 +3,16 @@
 const debug = require('debug')('todo:api:user-resolver')
 const config = require('../config')
 const { TaskService } = require('todo-db')
+const { AuthenticationError } = require('apollo-server-express')
 
 module.exports = {
   getTasks: async (roor, args, { isAuth, user }) => {
     debug(`getTasks`)
-    if (!isAuth) throw new AuthenticationError(`Invalid token...`)
+    debug(isAuth, config.server.auth)
+    
+    if (!isAuth && config.server.auth) {
+      throw new AuthenticationError(`Invalid token...`)
+    }
     try {
       debug(`userContext -> `, user)
       const taskService = new TaskService(config.db)

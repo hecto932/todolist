@@ -27,8 +27,8 @@ const api = new ApolloServer({
   typeDefs,
   resolvers,
   async context({ req }) {
-    let userData
-    let isAuth = true
+    let userData = null
+    let isAuth = false
 
     if (config.server.auth) {
       // get the user token from the headers
@@ -37,6 +37,7 @@ const api = new ApolloServer({
       try {
         const tokenPayload = await verify(token, config.auth.secret)
         userData = await getUser(tokenPayload)
+        isAuth = false
         debug(`isAuth -> ${isAuth}`)
         debug(`tokenPayload -> `, tokenPayload)
       } catch (err) {
@@ -44,8 +45,9 @@ const api = new ApolloServer({
         userData = null
         isAuth = false
       }
-      return { isAuth, userData }
     }
+
+    return { isAuth, userData }
   },
   validationRules: [
     depthLimit(config.graphql.depth),

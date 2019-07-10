@@ -3,6 +3,7 @@
 const debug = require('debug')('todo:api:user-queries')
 const { AuthenticationError } = require('apollo-server-express')
 const { UserService } = require('todo-db')
+const { sign } = require('../lib/auth')
 const config = require('../config')
 
 module.exports = {

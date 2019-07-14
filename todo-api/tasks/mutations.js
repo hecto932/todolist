@@ -28,7 +28,6 @@ module.exports = {
     debug(`Function: updateTask`)
 
     const defaultTask = {
-      name: '',
       updatedAt: new Date()
     }
 

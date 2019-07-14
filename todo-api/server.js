@@ -10,7 +10,7 @@ const config = require('./config')
 const { getUser, verify } = require('./lib/auth')
 const { createComplexityLimitRule } = require('graphql-validation-complexity')
 const depthLimit = require('graphql-depth-limit')
-const { ApolloServer, AuthenticationError } = require('apollo-server-express')
+const { ApolloServer } = require('apollo-server-express')
 
 const resolvers = require('./resolvers')
 const { typeDefs } = require('./schema')

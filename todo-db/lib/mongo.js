@@ -29,13 +29,14 @@ class MongoLib {
     });
   }
 
-  getAll(collection, query) {
+  getAll(collection, query, order) {
     debug(`${this.dbName} -> getAll -> ${collection}`);
     return this.connection().then(db => {
       return db
         .collection(collection)
         .find(query)
-        .toArray();
+        .sort(order)
+        .toArray()
     });
   }
 

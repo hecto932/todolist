@@ -16,7 +16,7 @@ input TaskInput {
 }
 
 input TaskEditInput {
-  name: String!
+  name: String
   done: Boolean
 }
 

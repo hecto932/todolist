@@ -5,8 +5,9 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
+import { connect } from 'react-redux';
+
+import { createTask } from '../../actions/tasksActions'
 
 const useStyles = makeStyles({
   root: {
@@ -28,12 +29,23 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AddTask() {
+function AddTask({ createTask, changeStatus }) {
   const classes = useStyles();
+
+  const handleKeyPress = (e) => {
+    const { value } = e.target
+    const { which } = e
+
+    if (value && which === 13) {
+      console.log(value)
+      createTask({ name: value })
+    }
+  }
 
   return (
     <Paper className={classes.root}>
       <InputBase
+        onKeyPress={handleKeyPress}
         className={classes.input}
         placeholder="Add a new task..."
         inputProps={{ 'aria-label': 'Search Google Maps' }}
@@ -45,3 +57,9 @@ export default function AddTask() {
     </Paper>
   );
 }
+
+const mapStateToProps = ({ tasks }) => tasks
+const mapDispatchToProps = {
+  createTask
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AddTask)

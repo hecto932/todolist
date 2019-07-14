@@ -18,13 +18,13 @@ class TaskService {
     return task || {}
   }
 
-  async getAll (queryParams) {
+  async getAll (queryParams, order) {
     const query = queryParams || {}
     if (query && query.userId) {
       query.userId = ObjectId(query.userId)
     }
 
-    const tasks = await this.mongoDB.getAll(this.collection, query)
+    const tasks = await this.mongoDB.getAll(this.collection, query, order)
 
     return tasks || []
   }

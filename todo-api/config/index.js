@@ -6,6 +6,7 @@ const production = process.env.NODE_ENV === 'production'
 const development = process.env.NODE_ENV === 'development'
 
 module.exports = {
+  appName: 'todo-app',
   production,
   development,
   server: {

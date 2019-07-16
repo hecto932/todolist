@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import { setUserLogin } from '../../helpers'
-import { userLoged } from '../../actions/usersActions'
+import { userLoged, userError } from '../../actions/usersActions'
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -30,7 +30,7 @@ const USER_LOGIN = gql`
   }
 `
 
-const UserLogin = ({ classes, userLoged }) => {
+const UserLogin = ({ classes, userLoged, userError }) => {
   return (
     <Mutation mutation={USER_LOGIN}>
       {(login, { data }) => {
@@ -56,7 +56,7 @@ const UserLogin = ({ classes, userLoged }) => {
                 console.log(`Response ->`, userLogin)
               } catch (err) {
                 console.log(`Error -> ${err.message}`)
-                console.log(err)
+                userError(err.message)
               }
             }}
           >
@@ -102,9 +102,9 @@ const UserLogin = ({ classes, userLoged }) => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <NavLink to="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </NavLink>
               </Grid>
             </Grid>
           </form>
@@ -114,19 +114,20 @@ const UserLogin = ({ classes, userLoged }) => {
   )
 }
 
-function FormLogin({ user, isLoading, error, userLoged }) {
+function FormLogin({ user, isLoading, error, userLoged, userError }) {
   const classes = useStyles()
 
   if (!(JSON.stringify(user) === JSON.stringify({}))) {
     return <Redirect to="/" />
   }
 
-  return <UserLogin classes={classes} userLoged={userLoged}/>
+  return <UserLogin classes={classes} userLoged={userLoged} userError={userError} />
 }
 
 const mapStateToProps = ({ user }) => user
 const mapDispatchToProps = {
-  userLoged
+  userLoged,
+  userError
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormLogin)

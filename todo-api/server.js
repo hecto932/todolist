@@ -49,6 +49,12 @@ const api = new ApolloServer({
 
     return { isAuth, userData }
   },
+  formatError: (err) => {
+    if (config.production) {
+      return { message: err.message }
+    }
+    return err
+  },
   validationRules: [
     depthLimit(config.graphql.depth),
     createComplexityLimitRule(config.graphql.complexity, {

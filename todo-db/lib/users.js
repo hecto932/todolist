@@ -20,6 +20,11 @@ class UserService {
     return users || []
   }
 
+  async create(data) {
+    const user = await this.mongoDB.create(this.collection, data)
+    return user
+  }
+
   async find(queryParams) {
     const query = queryParams || {}
     if (query && query._id) {

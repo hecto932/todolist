@@ -22,6 +22,9 @@ module.exports = {
   auth: {
     secret: process.env.AUTH_JWT_SECRET || 'todo-secret' // HERE AUTHENTICATION SECRET
   },
+  bcrypt: {
+    saltRounds: 10
+  },
   db: {
     dbUser: process.env.DB_USER,
     dbPass: process.env.DB_PASS,

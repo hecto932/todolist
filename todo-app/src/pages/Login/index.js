@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container'
 
 import FormLogin from './FormLogin'
 import { connect } from 'react-redux';
+import ErrorMessage from '../../General/ErrorMessage';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Login({ user }) {
+function Login({ user, error, isLoading }) {
   const classes = useStyles()
 
   return (
@@ -42,6 +43,7 @@ function Login({ user }) {
           Sign in
         </Typography>
         <FormLogin />
+        { error && <ErrorMessage message={error} /> }
       </div>
       <Box mt={5} />
     </Container>

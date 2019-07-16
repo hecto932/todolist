@@ -1,21 +1,26 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { red } from '@material-ui/core/colors'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
   root: {
     color: red,
     textAlign: 'center',
-    font
+    fontSize: '1em',
+    color: 'red',
+    fontWeight: 'light'
   }
 }))
 
-function ErrorMessage (props) {
+function ErrorMessage(props) {
   const classes = useStyles()
   const { message } = props
   return (
     message && (
-      <h2 className={classes.root}>{message}</h2>
+      <Typography className={classes.root} variant="h4" component="h5">
+        {message}
+      </Typography>
     )
   )
 }

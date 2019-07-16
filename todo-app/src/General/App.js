@@ -16,6 +16,7 @@ import Layout from './Layout'
 // PAGES
 import Home from '../pages/Home'
 import Login from '../pages/Login'
+import Register from '../pages/Register'
 import NotFound from '../pages/NotFound'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -41,8 +42,9 @@ export default function App() {
         <BrowserRouter>
           <Layout>
             <Switch>
-              <PrivateRoute exact path='/' component={Home} />
+              <PrivateRoute exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
               <Route component={NotFound} />
             </Switch>
           </Layout>

@@ -12,7 +12,7 @@ module.exports = {
 
     try {
       const userService = new UserService(config.db)
-      const users = userService.getAll({})
+      const users = await userService.getAll({})
       return users
     } catch (err) {
       debug(`Error -> ${err.message}`)
